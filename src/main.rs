@@ -1,3 +1,5 @@
+mod art;
+
 fn main() {
-    println!("Ryan stop!");
+    art::supermega();
 }
