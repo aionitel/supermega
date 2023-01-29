@@ -1,3 +1,5 @@
+mod args;
+
 use::colored::Colorize;
 use::clap::Parser;
 
@@ -23,18 +25,6 @@ fn supermega() {
     println!("{}", logo2.bright_blue());
 }
 
-#[derive(Parser, Debug)]
-struct Args {
-    // main category (e.g. "Justin")
-    #[arg(short, long)]
-    video: String,
-
-    // number of videos to return
-    #[arg(short, long, default_value_t = 1)]
-    count: i32,
-}
-
 fn main() {
-    let args = Args::parse();
-    println!("Args: {:?}", args);
+    let args = args::Args::parse();
 }
