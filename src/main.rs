@@ -1,6 +1,7 @@
 use::colored::Colorize;
 use::clap::Parser;
 
+// to display art
 fn supermega() {
     let logo1 = r#"    
     /\  _`\ /\ \/\ \/\  _`\ /\  _`\ /\  _`\     
@@ -21,18 +22,19 @@ fn supermega() {
     print!("{}", logo1.bright_red());
     println!("{}", logo2.bright_blue());
 }
+
 #[derive(Parser, Debug)]
-struct Cli {
+struct Args {
     // main category (e.g. "Justin")
     #[arg(short, long)]
     video: String,
-    
+
     // number of videos to return
     #[arg(short, long, default_value_t = 1)]
     count: i32,
 }
 
 fn main() {
-    let args = Cli::parse();
+    let args = Args::parse();
     println!("Args: {:?}", args);
 }
