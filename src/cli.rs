@@ -59,8 +59,8 @@ pub struct Args {
 }
 
 fn validate_args() {
-    let Args { video, count, list } = Args::parse();
-    println!("Args: {:?} {:?} {:?}", video, count, list);
+    let args = Args::parse();
+    println!("Args: {:?}", args);
 }
 
 pub fn run() {
