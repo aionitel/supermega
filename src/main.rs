@@ -1,4 +1,5 @@
 mod args;
+mod cli;
 
 use::colored::Colorize;
 use::clap::Parser;
@@ -26,5 +27,5 @@ fn supermega() {
 }
 
 fn main() {
-    let args = args::Args::parse();
+    let cli := cli::run();
 }

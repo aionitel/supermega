@@ -1,6 +1,12 @@
 use::clap::Parser;
 
-#[clap(author, version, about)]
+#[derive(Clap, Debug)]
+#[clap(
+    name = "SuperMega",
+    version = "0.1.0",
+    author = "Alex I.",
+    about = "SuperMega video picker"
+)]
 #[derive(Parser, Debug)]
 pub struct Args {
     /// Kind of of video. (e.g. "podcast" for a random podcast episode). Can supply more than one arguments.
