@@ -1,4 +1,3 @@
-mod args;
 mod cli;
 
 use::colored::Colorize;
@@ -27,5 +26,5 @@ fn supermega() {
 }
 
 fn main() {
-    let cli := cli::run();
+    cli::run();
 }
