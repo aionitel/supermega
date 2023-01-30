@@ -1,4 +1,27 @@
 use::clap::Parser;
+use::colored::Colorize;
+
+// to display art
+fn supermega() {
+    let logo1 = r#"    
+    /\  _`\ /\ \/\ \/\  _`\ /\  _`\ /\  _`\     
+    \ \,\L\_\ \ \ \ \ \ \L\ \ \ \L\_\ \ \L\ \   
+     \/_\__ \\ \ \ \ \ \ ,__/\ \  _\L\ \ ,  /   
+       /\ \L\ \ \ \_\ \ \ \/  \ \ \L\ \ \ \\ \  
+       \ `\____\ \_____\ \_\   \ \____/\ \_\ \_\
+        \/_____/\/_____/\/_/    \/___/  \/_/\/ /
+    "#;
+    let logo2 = r#"    
+    /'\_/`\/\  _`\ /\  _`\ /\  _  \            
+    /\      \ \ \L\_\ \ \L\_\ \ \L\ \           
+    \ \ \__\ \ \  _\L\ \ \L_L\ \  __ \          
+     \ \ \_/\ \ \ \L\ \ \ \/, \ \ \/\ \         
+      \ \_\\ \_\ \____/\ \____/\ \_\ \_\        
+       \/_/ \/_/\/___/  \/___/  \/_/\/_/    
+    "#;
+    print!("{}", logo1.bright_red());
+    println!("{}", logo2.bright_blue());
+}
 
 #[clap(
     name = "SuperMega",
@@ -9,15 +32,28 @@ use::clap::Parser;
 #[derive(Parser, Debug)]
 pub struct Args {
     /// Kind of of video. (e.g. "podcast" for a random podcast episode). Can supply more than one arguments.
-    #[arg(short, long)]
-    kind: String,
+    #[arg(
+        help_heading = Some("Video"),
+        short,
+        long,
+        value_name="VIDEO",
+    )]
+    video: String,
 
     /// Number of videos to return. (Default: 1)
-    #[arg(short, long, default_value_t = 1)]
+    #[arg(
+        help_heading = Some("Count"),
+        short,
+        long,
+        value_name="COUNT",
+    )]
     count: i32,
 }
 
+fn validate_args() {
+    let Args { video, count } = Args::parse();
+}
+
 pub fn run() {
-    let args = Args::parse();
-    println!("Args: {:?}", args);
+    validate_args();
 }
