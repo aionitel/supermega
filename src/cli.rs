@@ -48,10 +48,19 @@ pub struct Args {
         value_name="COUNT",
     )]
     count: i32,
+
+    /// List all possible video tags. (e.g. "Podcast" for a random podcast episode.)
+    #[arg(
+        help_heading = Some("List"),
+        short,
+        long,
+    )]
+    list: bool
 }
 
 fn validate_args() {
-    let Args { video, count } = Args::parse();
+    let Args { video, count, list } = Args::parse();
+    println!("Args: {:?} {:?} {:?}", video, count, list);
 }
 
 pub fn run() {
