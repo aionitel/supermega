@@ -27,16 +27,17 @@ fn supermega() {
     name = "SuperMega",
     version = "0.1.0",
     author = "Alex I.",
-    about = "SuperMega video picker"
+    about = "SuperMega video picker",
 )]
 #[derive(Parser, Debug)]
-pub struct Args {
+struct Args {
     /// Kind of of video. (e.g. "podcast" for a random podcast episode). Can supply more than one arguments.
     #[arg(
         help_heading = Some("Video"),
         short,
         long,
         value_name="VIDEO",
+        required = false,
     )]
     video: String,
 
@@ -46,6 +47,7 @@ pub struct Args {
         short,
         long,
         value_name="COUNT",
+        required = false
     )]
     count: i32,
 
@@ -58,11 +60,12 @@ pub struct Args {
     list: bool
 }
 
-fn validate_args() {
+fn validate_args() -> Args  {
     let args = Args::parse();
-    println!("Args: {:?}", args);
+    args
 }
 
 pub fn run() {
-    validate_args();
+    let args = validate_args();
+    println!("{:?}", args);
 }
