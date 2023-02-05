@@ -1,32 +1,11 @@
+mod art;
+
+use art::draw;
 use::clap::Parser;
 use::colored::Colorize;
 use std::time::Duration;
 use std::thread::sleep;
 
-// to print art
-fn supermega() {
-    let logo1 = r#"    
-    .▄▄ · ▄• ▄▌ ▄▄▄·▄▄▄ .▄▄▄  
-    ▐█ ▀. █▪██▌▐█ ▄█▀▄.▀·▀▄ █·
-    ▄▀▀▀█▄█▌▐█▌ ██▀·▐▀▀▪▄▐▀▀▄ 
-    ▐█▄▪▐█▐█▄█▌▐█▪·•▐█▄▄▌▐█•█▌
-     ▀▀▀▀  ▀▀▀ .▀    ▀▀▀ .▀  ▀ "#;
-    let logo2 = r#"    
-    • ▌ ▄ ·. ▄▄▄ . ▄▄ •  ▄▄▄· 
-    ·██ ▐███▪▀▄.▀·▐█ ▀ ▪▐█ ▀█ 
-    ▐█ ▌▐▌▐█·▐▀▀▪▄▄█ ▀█▄▄█▀▀█ 
-    ██ ██▌▐█▌▐█▄▄▌▐█▄▪▐█▐█▪ ▐▌
-    ▀▀  █▪▀▀▀ ▀▀▀ ·▀▀▀▀  ▀  ▀ 
-    "#;
-    for line in logo1.lines() {
-        println!("{}", line.bright_red());
-        sleep(Duration::from_millis(15));
-    }
-    for line in logo2.lines() {
-        println!("{}", line.bright_blue());
-        sleep(Duration::from_millis(15));
-    }
-}
 
 #[clap(
     name = "SuperMega",
@@ -76,7 +55,7 @@ fn validate_args() -> Args {
 
 pub fn run() {
     // print nice logo before running clap
-    supermega();
+    draw();
     let Args { video, count, list } = validate_args();
-    println!("Args: video: {:?}, count: {:?}, list: {:?}", video, count, list);
+    println!("{:?}", video);
 }
