@@ -1,26 +1,31 @@
 use::clap::Parser;
 use::colored::Colorize;
+use std::time::Duration;
+use std::thread::sleep;
 
-// to display art
+// to print art
 fn supermega() {
     let logo1 = r#"    
-    /\  _`\ /\ \/\ \/\  _`\ /\  _`\ /\  _`\     
-    \ \,\L\_\ \ \ \ \ \ \L\ \ \ \L\_\ \ \L\ \   
-     \/_\__ \\ \ \ \ \ \ ,__/\ \  _\L\ \ ,  /   
-       /\ \L\ \ \ \_\ \ \ \/  \ \ \L\ \ \ \\ \  
-       \ `\____\ \_____\ \_\   \ \____/\ \_\ \_\
-        \/_____/\/_____/\/_/    \/___/  \/_/\/ /
-    "#;
+    .▄▄ · ▄• ▄▌ ▄▄▄·▄▄▄ .▄▄▄  
+    ▐█ ▀. █▪██▌▐█ ▄█▀▄.▀·▀▄ █·
+    ▄▀▀▀█▄█▌▐█▌ ██▀·▐▀▀▪▄▐▀▀▄ 
+    ▐█▄▪▐█▐█▄█▌▐█▪·•▐█▄▄▌▐█•█▌
+     ▀▀▀▀  ▀▀▀ .▀    ▀▀▀ .▀  ▀ "#;
     let logo2 = r#"    
-    /'\_/`\/\  _`\ /\  _`\ /\  _  \            
-    /\      \ \ \L\_\ \ \L\_\ \ \L\ \           
-    \ \ \__\ \ \  _\L\ \ \L_L\ \  __ \          
-     \ \ \_/\ \ \ \L\ \ \ \/, \ \ \/\ \         
-      \ \_\\ \_\ \____/\ \____/\ \_\ \_\        
-       \/_/ \/_/\/___/  \/___/  \/_/\/_/    
+    • ▌ ▄ ·. ▄▄▄ . ▄▄ •  ▄▄▄· 
+    ·██ ▐███▪▀▄.▀·▐█ ▀ ▪▐█ ▀█ 
+    ▐█ ▌▐▌▐█·▐▀▀▪▄▄█ ▀█▄▄█▀▀█ 
+    ██ ██▌▐█▌▐█▄▄▌▐█▄▪▐█▐█▪ ▐▌
+    ▀▀  █▪▀▀▀ ▀▀▀ ·▀▀▀▀  ▀  ▀ 
     "#;
-    print!("{}", logo1.bright_red());
-    println!("{}", logo2.bright_blue());
+    for line in logo1.lines() {
+        println!("{}", line.bright_red());
+        sleep(Duration::from_millis(15));
+    }
+    for line in logo2.lines() {
+        println!("{}", line.bright_blue());
+        sleep(Duration::from_millis(15));
+    }
 }
 
 #[clap(
@@ -29,6 +34,7 @@ fn supermega() {
     author = "Alex I.",
     about = "SuperMega video picker",
 )]
+
 #[derive(Parser, Debug)]
 struct Args {
     /// Kind of of video. (e.g. "podcast" for a random podcast episode). Can supply more than one arguments.
@@ -37,7 +43,6 @@ struct Args {
         short,
         long,
         value_name="VIDEO",
-        required = false,
     )]
     video: String,
 
@@ -47,7 +52,6 @@ struct Args {
         short,
         long,
         value_name="COUNT",
-        required = false
     )]
     count: i32,
 
@@ -60,12 +64,14 @@ struct Args {
     list: bool
 }
 
-fn validate_args() -> Args  {
+fn validate_args() -> Args {
     let args = Args::parse();
     args
 }
 
 pub fn run() {
-    let args = validate_args();
-    println!("{:?}", args);
+    // print nice logo before running clap
+    supermega();
+    let Args { video, count, list } = validate_args();
+    println!("video: {:?}", video);
 }
