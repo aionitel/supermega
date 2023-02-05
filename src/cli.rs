@@ -65,13 +65,16 @@ struct Args {
 }
 
 fn validate_args() -> Args {
-    let args = Args::parse();
-    args
+    if let args = Args::parse() {
+        return args;
+    }
+
+    panic!("Problem parsing arguments.");
 }
 
 pub fn run() {
     // print nice logo before running clap
     supermega();
     let Args { video, count, list } = validate_args();
-    println!("video: {:?}", video);
+    println!("Args: video: {:?}, count: {:?}, list: {:?}", video, count, list);
 }
