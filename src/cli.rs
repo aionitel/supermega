@@ -34,7 +34,6 @@ fn supermega() {
     author = "Alex I.",
     about = "SuperMega video picker",
 )]
-
 #[derive(Parser, Debug)]
 struct Args {
     /// Kind of of video. (e.g. "podcast" for a random podcast episode). Can supply more than one arguments.
@@ -43,6 +42,7 @@ struct Args {
         short,
         long,
         value_name="VIDEO",
+        default_value = "any"
     )]
     video: String,
 
@@ -52,14 +52,16 @@ struct Args {
         short,
         long,
         value_name="COUNT",
+        default_value = "1"
     )]
     count: i32,
 
-    /// List all possible video tags. (e.g. "Podcast" for a random podcast episode.)
+    /// List all possible video tags. (e.g. "Podcast" for a random podcast episode, default is false)
     #[arg(
         help_heading = Some("List"),
         short,
         long,
+        default_value = "false"
     )]
     list: bool
 }
