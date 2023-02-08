@@ -1,5 +1,4 @@
-mod art;
-mod list;
+mod utils;
 
 use::clap::Parser;
 use std::process::exit;
@@ -52,10 +51,10 @@ fn validate_args() -> Args {
 
 pub fn run() {
     // draw art on every command
-    art::draw();
+    utils::draw();
     let Args { video, count, list } = validate_args();
 
     if list {
-        list::write();
+        utils::write();
     }
 }
