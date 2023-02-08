@@ -8,7 +8,6 @@ use std::process::exit;
     name = "SuperMega",
     version = "0.1.0",
     author = "Alex I.",
-    about = "SuperMega video picker",
 )]
 #[derive(Parser, Debug)]
 struct Args {
@@ -22,7 +21,7 @@ struct Args {
     )]
     video: String,
 
-    /// Number of videos to return. (Default: 1)
+    /// Number of videos to return.
     #[arg(
         help_heading = Some("Count"),
         short,
