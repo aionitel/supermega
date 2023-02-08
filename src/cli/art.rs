@@ -22,7 +22,7 @@ pub fn draw() {
         sleep(Duration::from_millis(15));
     }
     for line in logo2.lines() {
-        println!("{}", line.bright_blue());
+        println!("{}", line.blue());
         sleep(Duration::from_millis(15));
     }
 }

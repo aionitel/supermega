@@ -1,11 +1,8 @@
 mod art;
+mod list;
 
-use art::draw;
 use::clap::Parser;
-use::colored::Colorize;
-use std::time::Duration;
-use std::thread::sleep;
-
+use std::process::exit;
 
 #[clap(
     name = "SuperMega",
@@ -50,12 +47,16 @@ fn validate_args() -> Args {
         return args;
     }
 
+    // panic if error with parsing args
     panic!("Problem parsing arguments.");
 }
 
 pub fn run() {
-    // print nice logo before running clap
-    draw();
+    // draw art on every command
+    art::draw();
     let Args { video, count, list } = validate_args();
-    println!("{:?}", video);
+
+    if list {
+        list::write();
+    }
 }
