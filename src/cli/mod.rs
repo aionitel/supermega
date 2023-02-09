@@ -1,7 +1,9 @@
 mod utils;
+mod data;
 
 use::clap::Parser;
 use std::process::exit;
+use dotenv;
 
 #[clap(
     name = "SuperMega",
@@ -50,6 +52,9 @@ fn validate_args() -> Args {
 }
 
 pub fn run() {
+    // init .env
+    dotenv::dotenv().ok();
+
     // draw art on every command
     utils::draw();
     let Args { video, count, list } = validate_args();
@@ -57,4 +62,6 @@ pub fn run() {
     if list {
         utils::write();
     }
+
+    data::get_video();
 }
