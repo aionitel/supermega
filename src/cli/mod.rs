@@ -63,5 +63,5 @@ pub fn run() {
         utils::write();
     }
 
-    data::get_video();
+    data::get_video().await;
 }
