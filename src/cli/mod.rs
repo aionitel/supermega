@@ -51,7 +51,7 @@ fn validate_args() -> Args {
     panic!("Problem parsing arguments.");
 }
 
-pub fn run() {
+pub async fn run() {
     // init .env
     dotenv::dotenv().ok();
 

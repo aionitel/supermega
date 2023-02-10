@@ -15,8 +15,4 @@ const channel_id: &str = "UCPPc2PdtA7gCMbjYp_i_TKA";
 
 pub async fn get_video() {
     let api_key = env::var("API_KEY").expect("API_KEY must be set.");
-
-    let url = format!("https://www.googleapis.com/youtube/v3/search?key={}&channelId={}&part=snippet&maxResults=10&q=plays", api_key, channel_id);
-
-    println!("{}", url);
 }

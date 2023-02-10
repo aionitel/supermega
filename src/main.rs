@@ -1,6 +1,8 @@
 mod cli;
 
-// entry point to cli, "run()"
-fn main() {
-    cli::run();
+use tokio;
+
+#[tokio::main]
+async fn main() {
+    cli::run().await;
 }
