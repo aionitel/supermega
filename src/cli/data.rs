@@ -1,5 +1,6 @@
 use std::env;
-use reqwest::Client;
+use std::fmt::Error;
+use reqwest as req;
 
 #[derive(Debug)]
 struct Video {
@@ -14,15 +15,10 @@ struct Video {
 // SuperMega youtube channel_id
 const channel_id: &str = "UCPPc2PdtA7gCMbjYp_i_TKA";
 
-pub async fn get_video() -> Result<(), reqwest::Error> {
-    // init reqwest client and get youtube api key from env
-    let client = Client::new();
+pub async fn get_video(query: &str, count: i32) -> Result<String, Error> {
+    // get api key from .env and format url with query and count
     let api_key = env::var("API_KEY").expect("API_KEY must be set.");
-
     let url = format!("https://www.googleapis.com/youtube/v3/search?key={}&channelId={}&part=snippet&maxResults=10&q=plays", api_key, channel_id);
 
-    let res = client.get(url).send().await.expect("failed to get response").json().await.expect("idk");
-    println!("{:?}", res);
-    
-    Ok(())
+    let data = req::get(url).await.expect("get text idfk").text().await.unwrap();
 }

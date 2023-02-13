@@ -63,5 +63,6 @@ pub async fn run() {
         utils::write();
     }
 
-    data::get_video().await;
+    let data = data::get_video("plays", 2).await;
+    println!("Data: {:?}", data);
 }
