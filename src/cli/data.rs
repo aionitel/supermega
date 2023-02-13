@@ -15,10 +15,12 @@ struct Video {
 // SuperMega youtube channel_id
 const channel_id: &str = "UCPPc2PdtA7gCMbjYp_i_TKA";
 
-pub async fn get_video(query: &str, count: i32) -> Result<String, Error> {
+// get video from simple queries like "letsplay"
+pub async fn get_video(query: &str, count: i32) -> String {
     // get api key from .env and format url with query and count
     let api_key = env::var("API_KEY").expect("API_KEY must be set.");
-    let url = format!("https://www.googleapis.com/youtube/v3/search?key={}&channelId={}&part=snippet&maxResults=10&q=plays", api_key, channel_id);
+    let url = format!("https://www.googleapis.com/youtube/v3/search?key={}&channelId={}&part=snippet&maxResults={}&q={}", api_key, channel_id, count, query);
 
     let data = req::get(url).await.expect("get text idfk").text().await.unwrap();
+    data
 }

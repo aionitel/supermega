@@ -850,6 +850,7 @@ dependencies = [
  "colored",
  "dotenv",
  "reqwest",
+ "serde_json",
  "tokio",
 ]
 
