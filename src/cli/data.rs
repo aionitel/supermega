@@ -38,7 +38,6 @@ pub async fn get_video(query: String, count: i32) -> Vec<Video> {
     let data: Value = res.expect("msg").json().await.unwrap();
     let items = &data["items"];
     let json_data: Vec<Video> = serde_json::from_value(items.clone()).unwrap();
-
-    // lol
+    
     json_data
 }

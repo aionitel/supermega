@@ -1,5 +1,6 @@
 use clap::Parser;
 use dotenv;
+use std::process;
 
 mod utils;
 mod data;
@@ -45,22 +46,20 @@ fn validate_args() -> Args {
     if let args = Args::parse() {
         return args;
     }
-
-    // panic if error with parsing args
     panic!("Problem parsing arguments.");
 }
 
 pub async fn run() {
-    // init .env
+    // init .env and draw art each time it runs
     dotenv::dotenv().ok();
-
-    // draw art on every command
     utils::draw();
 
-    // validate and get args with derefrencing
     let Args { video, count, list }= validate_args();
 
+    // terminate program right after printing list
+    // avoid running rest of program
     if list {
         utils::write();
+        process::exit(0);
     }
 }
