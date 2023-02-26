@@ -12,15 +12,15 @@ mod data;
 )]
 #[derive(Parser, Debug)]
 struct Args {
-    /// Kind of of video. (e.g. "podcast" for a random podcast episode). Can supply more than one arguments.
+    /// Query for type of video. (e.g. "podcast" for a random podcast episode). Can supply more than one query argument.
     #[arg(
-        help_heading = Some("Video"),
+        help_heading = Some("Query"),
         short,
         long,
-        value_name="VIDEO",
+        value_name="QUERY",
         default_value = "any"
     )]
-    video: String,
+    query: String,
 
     /// Number of videos to return.
     #[arg(
@@ -54,7 +54,7 @@ pub async fn run() {
     dotenv::dotenv().ok();
     utils::draw();
 
-    let Args { video, count, list }= validate_args();
+    let Args { query, count, list }= validate_args();
 
     // terminate program right after printing list
     // avoid running rest of program
@@ -62,4 +62,8 @@ pub async fn run() {
         utils::write();
         process::exit(0);
     }
+
+    // fetch video data
+    let supermega_data = data::get_video(query, count).await;
+    println!("{:?}", supermega_data);
 }
