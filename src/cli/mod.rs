@@ -1,9 +1,8 @@
+use clap::Parser;
+use dotenv;
+
 mod utils;
 mod data;
-
-use::clap::Parser;
-use std::process::exit;
-use dotenv;
 
 #[clap(
     name = "SuperMega",
@@ -57,11 +56,11 @@ pub async fn run() {
 
     // draw art on every command
     utils::draw();
-    let Args { video, count, list } = validate_args();
+
+    // validate and get args with derefrencing
+    let Args { video, count, list }= validate_args();
 
     if list {
         utils::write();
     }
-
-    let data = data::get_video("plays", 2).await;
 }

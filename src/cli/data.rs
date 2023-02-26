@@ -5,21 +5,21 @@ use serde_json::Value;
 
 #[derive(Debug, Deserialize)]
 pub struct Video {
-    id: Id,
+    pub id: Id,
     pub snippet: Snippet
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Id {
     #[serde(rename = "videoId")]
-    video_id: String,
+    pub video_id: String,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Snippet {
     #[serde(rename = "publishedAt")]
-    pub_at: String,
-    title: String,
+    pub pub_at: String,
+    pub title: String,
     #[serde(rename = "description")]
     pub desc: String,
 }
@@ -28,7 +28,7 @@ pub struct Snippet {
 const CHANNEL_ID: &str = "UCPPc2PdtA7gCMbjYp_i_TKA";
 
 // get video from simple queries
-pub async fn get_video(query: &str, count: i32) -> Vec<Video> {
+pub async fn get_video(query: String, count: i32) -> Vec<Video> {
     // get api key from .env and format url with query and count
     let api_key = env::var("API_KEY").expect("API_KEY must be set.");
     let url = format!("https://www.googleapis.com/youtube/v3/search?key={}&channelId={}&part=snippet&maxResults={}&q={}", api_key, CHANNEL_ID, count, query);
@@ -39,5 +39,6 @@ pub async fn get_video(query: &str, count: i32) -> Vec<Video> {
     let items = &data["items"];
     let json_data: Vec<Video> = serde_json::from_value(items.clone()).unwrap();
 
+    // lol
     json_data
 }
