@@ -5,11 +5,6 @@ use std::process;
 mod utils;
 mod data;
 
-#[clap(
-    name = "SuperMega",
-    version = "0.1.0",
-    author = "Alex I.",
-)]
 #[derive(Parser, Debug)]
 struct Args {
     /// Query for type of video. (e.g. "podcast" for a random podcast episode). Can supply more than one query argument.
@@ -42,19 +37,12 @@ struct Args {
     list: bool
 }
 
-fn validate_args() -> Args {
-    if let args = Args::parse() {
-        return args;
-    }
-    panic!("Problem parsing arguments.");
-}
-
 pub async fn run() {
     // init .env and draw art each time it runs
     dotenv::dotenv().ok();
     utils::draw();
 
-    let Args { query, count, list }= validate_args();
+    let Args { query, count, list }= Args::parse();
 
     // terminate program right after printing list
     // avoid running rest of program
