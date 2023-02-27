@@ -2,8 +2,9 @@ use clap::Parser;
 use dotenv;
 use std::process;
 
-mod utils;
 mod data;
+mod utils;
+mod types;
 
 #[derive(Parser, Debug)]
 struct Args {
@@ -50,8 +51,4 @@ pub async fn run() {
         utils::write();
         process::exit(0);
     }
-
-    // fetch video data
-    let supermega_data = data::get_video(query, count).await;
-    println!("{:?}", supermega_data);
 }
