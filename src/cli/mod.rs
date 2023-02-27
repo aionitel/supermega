@@ -5,6 +5,7 @@ use std::process;
 mod data;
 mod utils;
 mod types;
+mod format;
 
 #[derive(Parser, Debug)]
 struct Args {
@@ -51,4 +52,8 @@ pub async fn run() {
         utils::write();
         process::exit(0);
     }
+
+    // get videos and print them nicely
+    let videos = data::get_video(query, count).await;
+    format::print_videos(videos);
 }
